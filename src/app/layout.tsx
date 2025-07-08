@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
+import { Roboto } from "next/font/google";
 import Providers from '../components/Providers';
 import TopNav from "@/components/navbar/TopNav";
 import "./globals.css";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-roboto",
+});
 
 export const metadata: Metadata = {
   title: "Findr",
@@ -15,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={roboto.className}>
         <Providers>
           <TopNav />
           <main className="container mx-auto p-10">

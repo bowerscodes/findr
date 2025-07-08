@@ -6,7 +6,7 @@ import { FaRegSmile } from "react-icons/fa";
 export default function Home() {
   return (
     <div>
-      <h1 className="text-3xl">Welcome to Findr</h1>
+      <h1 className="text-3xl">Welcome to findr</h1>
       <Button 
         as={Link}
         href="/members"

@@ -2,14 +2,14 @@
 import { Button, Navbar, NavbarBrand, NavbarContent } from '@heroui/react'
 import Link from 'next/link';
 import React from 'react'
-import { GiMatchTip } from 'react-icons/gi'
+import { TbHeartSearch } from "react-icons/tb";
 import NavLink from './NavLink';
 
 export default function TopNav() {
   return (
     <Navbar
     maxWidth="xl"
-    className="bg-gradient-to-r from-purple-400 to-purple-700"
+    className="bg-gradient-to-r from-red-400 to-red-600"
     classNames={{
       item: [
         "text-xl",
@@ -20,10 +20,9 @@ export default function TopNav() {
     }}
     >
       <NavbarBrand as={Link} href="/" className="flex items-center gap-2">
-        <GiMatchTip size={40} className="text-gray-200"/>
+        <TbHeartSearch size={40} className="text-gray-200"/>
         <div className="font-bold text-3xl flex">
-          <span className="text-gray-900">Findr</span>
-          <span className="text-gray-200">Match</span>
+          <span className="text-gray-900">findr</span>
         </div>
       </NavbarBrand>
       <NavbarContent justify="center">
