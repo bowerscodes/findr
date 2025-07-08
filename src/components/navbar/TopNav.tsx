@@ -1,8 +1,9 @@
 "use client";
-import { Button, Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@heroui/react'
+import { Button, Navbar, NavbarBrand, NavbarContent } from '@heroui/react'
 import Link from 'next/link';
 import React from 'react'
 import { GiMatchTip } from 'react-icons/gi'
+import NavLink from './NavLink';
 
 export default function TopNav() {
   return (
@@ -14,6 +15,7 @@ export default function TopNav() {
         "text-xl",
         "text-white",
         "uppercase",
+        "data-[active=true]:text-yellow-200",
       ]
     }}
     >
@@ -25,13 +27,13 @@ export default function TopNav() {
         </div>
       </NavbarBrand>
       <NavbarContent justify="center">
-        <NavbarItem as={Link} href="/members">Matches</NavbarItem>
-        <NavbarItem as={Link} href="/lists">Lists</NavbarItem>
-        <NavbarItem as={Link} href="/messages">Messages</NavbarItem>
+        <NavLink href="/members" label="Matches" />
+        <NavLink href="/lists" label="Lists" />
+        <NavLink href="/messages" label="Messages" />
       </NavbarContent>
       <NavbarContent justify="end">
-        <Button variant="bordered" className="text-white">Login</Button>
-        <Button variant="bordered" className="text-white">Register</Button>
+        <Button as={Link} href="/login" variant="bordered" className="text-white">Login</Button>
+        <Button as={Link} href="/register" variant="bordered" className="text-white">Register</Button>
       </NavbarContent>
     </Navbar>
   )
