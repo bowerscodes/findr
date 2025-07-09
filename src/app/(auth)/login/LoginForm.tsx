@@ -1,20 +1,28 @@
 "use client";
 
 import React from 'react'
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { LoginSchema, loginSchema } from '@/lib/schemas/loginSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Card, CardBody, CardHeader, Input } from '@heroui/react'
 import { GiPadlock } from 'react-icons/gi'
+import { signInUser } from '@/app/actions/authActions';
 
 export default function LoginForm() {
-  const {register, handleSubmit, formState: {errors, isValid}} = useForm<LoginSchema>({
+  const router = useRouter();
+  const {register, handleSubmit, formState: { errors, isValid, isSubmitting }} = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
     mode: "onTouched"
   });
   
-  const onSubmit = (data: LoginSchema) => {
-    console.log(data);
+  const onSubmit = async (data: LoginSchema) => {
+    const result = await signInUser(data);
+    if (result.status === "success") {
+      router.push("/members");
+    } else {
+      console.log(result.error);
+    }
   };
   
   return (
@@ -48,7 +56,13 @@ export default function LoginForm() {
               isInvalid={!!errors.password}
               errorMessage={errors.password?.message}
             />
-            <Button isDisabled={!isValid} fullWidth color="secondary" type="submit">
+            <Button 
+              isDisabled={!isValid} 
+              isLoading={isSubmitting}
+              fullWidth 
+              color="secondary" 
+              type="submit"
+            >
               Login
             </Button>
           </div>
