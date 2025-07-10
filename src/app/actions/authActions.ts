@@ -9,10 +9,6 @@ import { ActionResult } from "@/types";
 import bcrypt from "bcryptjs";
 import { AuthError } from "next-auth";
 
-export async function signOutUser() {
-  await signOut();
-};
-
 export async function signInUser(data: LoginSchema): Promise<ActionResult<string>> {
   try {
     const result = await signIn("credentials", {
@@ -39,6 +35,12 @@ export async function signInUser(data: LoginSchema): Promise<ActionResult<string
     }
   }
 };
+
+
+export async function signOutUser() {
+  await signOut({redirectTo: "/"});
+};
+
 
 export async function registerUser(data: RegisterSchema): Promise<ActionResult<User>> {
   try {

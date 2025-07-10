@@ -1,14 +1,15 @@
 "use client";
 import React from 'react'
 import { useForm } from 'react-hook-form';
-import { RegisterSchema } from '@/lib/schemas/registerSchema';
+import { registerSchema, RegisterSchema } from '@/lib/schemas/registerSchema';
 import { registerUser } from '@/app/actions/authActions';
 import { Button, Card, CardBody, CardHeader, Input } from '@heroui/react';
 import { GiPadlock } from 'react-icons/gi';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export default function RegisterForm() {
   const {register, handleSubmit, setError, formState: { errors, isValid, isSubmitting }} = useForm<RegisterSchema>({
-      // resolver: zodResolver(registerSchema),
+      resolver: zodResolver(registerSchema),
       mode: "onTouched"
     });
 
