@@ -17,6 +17,7 @@ export async function getMembers() {
     });
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -26,4 +27,15 @@ export async function getMemberById(userId: string) {
   } catch (error) {
     console.log(error);
   }
+};
+
+export async function getMemberPhotosByUserId(userId: string) {
+  const member = await prisma.member.findUnique({
+    where: { userId },
+    select: {photos: true},
+  });
+
+  if (!member) return [];
+
+  return member.photos;
 };

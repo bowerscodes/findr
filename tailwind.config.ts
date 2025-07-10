@@ -16,6 +16,10 @@ const config = {
       },
       fontFamily: {
         sans: ['Roboto', 'sans-serif'],
+      },
+      colors: {
+        primary: "black",
+        secondary: "red",
       }
     }
   },

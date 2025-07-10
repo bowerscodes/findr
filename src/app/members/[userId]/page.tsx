@@ -1,16 +1,15 @@
-import { getUserById } from '@/app/actions/authActions'
 import { notFound } from 'next/navigation';
 import React from 'react'
+import PageClient from './PageClient';
+import { getMemberById } from '@/app/actions/memberActions';
 
 export default async function MemberDetailedPage({ params }: { params: Promise<{ userId: string }> }) {
   const { userId } = await params;
-  const member = await getUserById(userId);
+  const member = await getMemberById(userId);
   
   if (!member) return notFound();
   
   return (
-    <div>
-      {member.name}
-    </div>
+    <PageClient member={member} />
   )
 };
