@@ -13,6 +13,7 @@
     "@heroui/button": "^2.2.22",
     "@heroui/react": "^2.7.11",
     "@hookform/resolvers": "^5.1.1",
+    "@nextui-org/react": "^2.6.11",
     "@prisma/client": "^6.11.1",
     "bcryptjs": "^3.0.2",
     "framer-motion": "^12.23.0",
