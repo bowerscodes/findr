@@ -9,7 +9,6 @@ export default function LoadingComponent({ label }: { label?: string }) {
         color="primary"
         labelColor="primary"
       />
-      
     </div>
   )
 }

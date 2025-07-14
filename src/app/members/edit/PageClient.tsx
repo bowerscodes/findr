@@ -1,19 +1,19 @@
 "use client";
 
 import React from "react";
-import { CardBody, CardHeader, Divider } from "@heroui/react";
+import { CardBody, CardHeader, Divider } from "@heroui/react"
+import EditForm from "./EditForm";
 import { Member } from "@/generated/prisma";
 
-
-export default function PageClient({ member }: { member: Member } ) {
+export default function PageClient({ member }: { member: Member }) {
   return (
     <>
       <CardHeader className="text-2xl font-semibold text-secondary">
-        Profile
+        Edit Profile
       </CardHeader>
       <Divider />
       <CardBody>
-        {member.description}
+        <EditForm member={member} />
       </CardBody>
     </>
   )

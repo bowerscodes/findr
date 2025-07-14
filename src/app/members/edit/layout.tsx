@@ -3,27 +3,23 @@ import { getMemberById } from "@/app/actions/memberActions";
 import MemberSidebar from "../MemberSidebar";
 import { notFound } from "next/navigation";
 import LayoutClient from "./LayoutClient";
+import { getAuthUserId } from "@/app/actions/authActions";
 
-type Props = {
-  children: ReactNode;
-  params: Promise<{ userId: string }>;
-};
+
 
 export default async function layout({ 
   children, 
-  params 
-}: Props ) {
-  const { userId } = await params;
+}: { children: ReactNode }) {
+  const userId = await getAuthUserId();;
   const member = await getMemberById(userId);
 
   if (!member) return notFound();
 
-  const basePath = `/members/${member.userId}`;
+  const basePath = `/members/edit`;
 
   const navLinks = [
-    { name: "Profile", href: `${basePath}` },
-    { name: "Photos", href: `${basePath}/photos` },
-    { name: "Chats", href: `${basePath}/chat` },
+    { name: "Edit Profile", href: `${basePath}` },
+    { name: "Upload Photos", href: `${basePath}/photos` },
   ];
 
   return (

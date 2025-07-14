@@ -6,30 +6,23 @@ import { registerUser } from '@/app/actions/authActions';
 import { Button, Card, CardBody, CardHeader, Input } from '@heroui/react';
 import { GiPadlock } from 'react-icons/gi';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { handleFormServerErrors } from '@/lib/util';
 
 export default function RegisterForm() {
   const {register, handleSubmit, setError, formState: { errors, isValid, isSubmitting }} = useForm<RegisterSchema>({
-      resolver: zodResolver(registerSchema),
-      mode: "onTouched"
-    });
+    resolver: zodResolver(registerSchema),
+    mode: "onTouched"
+  });
 
-    const onSubmit = async (data: RegisterSchema) => {
-      const result = await registerUser(data);
+  const onSubmit = async (data: RegisterSchema) => {
+    const result = await registerUser(data);
 
-      if (result.status === "success") {
-        console.log("User registered successfully")
-      } else {
-        if (Array.isArray(result.error)) {
-          result.error.forEach((e) => {
-            const fieldName = e.path.join(".") as 'email' | 'name' | 'password';
-            setError(fieldName, { message: e.message })
-          })
-      } else {
-        setError("root.serverError", { message: result.error });
-      }
-
-    };
-  }
+    if (result.status === "success") {
+      console.log("User registered successfully")
+    } else {
+      handleFormServerErrors(result, setError);
+    }
+  };
 
   return (
     <Card className="w-2/5 mx-auto">
