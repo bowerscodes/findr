@@ -2,9 +2,10 @@
 
 import DeleteButton from "@/components/DeleteButton";
 import StarButton from "@/components/StarButton";
-import { CardHeader, Divider, CardBody, Image } from "@heroui/react";
+import { CardHeader, Divider, CardBody } from "@heroui/react";
 import React from "react";
 import MemberPhotoUpload from "./MemberPhotoUpload";
+import MemberImage from "@/components/MemberImage";
 
 type Photo = {
   id: string;
@@ -29,11 +30,8 @@ export default function PageClient({ photos }: Props) {
         <div className="grid grid-cols-5 gap-3 p-5">
           {photos && photos.map(photo => (
             <div key={photo.id} className="relative">
-              <Image 
-                width="100%"
-                className="aspect-square object-cover"
-                src={photo.url} 
-                alt="Image of user"
+              <MemberImage 
+                photo={photo}
               />
               <div className="absolute top-3 left-3 z-50">
                 <StarButton selected={true} loading={false} />
