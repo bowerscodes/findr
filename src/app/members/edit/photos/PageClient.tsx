@@ -1,10 +1,10 @@
 "use client";
 
 import DeleteButton from "@/components/DeleteButton";
-import ImageUploadButton from "@/components/ImageUploadButton";
 import StarButton from "@/components/StarButton";
 import { CardHeader, Divider, CardBody, Image } from "@heroui/react";
 import React from "react";
+import MemberPhotoUpload from "./MemberPhotoUpload";
 
 type Photo = {
   id: string;
@@ -25,9 +25,7 @@ export default function PageClient({ photos }: Props) {
       </CardHeader>
       <Divider />
       <CardBody>
-        <div className="pt-5 pl-5">
-          <ImageUploadButton />
-        </div>
+        <MemberPhotoUpload />
         <div className="grid grid-cols-5 gap-3 p-5">
           {photos && photos.map(photo => (
             <div key={photo.id} className="relative">
