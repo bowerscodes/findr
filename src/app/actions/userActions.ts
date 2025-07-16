@@ -1,6 +1,6 @@
 "use server"
 
-import { Member } from "@/generated/prisma"
+import { Member, Photo } from "@/generated/prisma"
 import { memberEditSchema, MemberEditSchema } from "@/lib/schemas/memberEditSchema"
 import { ActionResult } from "@/types"
 import { getAuthUserId } from "./authActions";
@@ -51,6 +51,25 @@ export async function addImage(url: string, publicId: string) {
         }
       }
     })
+  } catch (error) {
+    console.log(error);
+    throw error;
+  };
+};
+
+export async function setMainImage(photo: Photo) {
+  try {
+    const userId = await getAuthUserId();
+
+    await prisma.user.update({
+      where: { id: userId },
+      data: { image: photo.url }
+    });
+
+    return prisma.member.update(({
+      where: { userId },
+      data: { image: photo.url }
+    }));
   } catch (error) {
     console.log(error);
     throw error;
