@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
-import { CardBody, CardHeader, Divider } from "@heroui/react";
 import { Member } from "@/generated/prisma";
+import CardInnerWrapper from "@/components/CardInnerWrapper";
+import ChatForm from "./ChatForm";
 
 interface Props {
   member: Member;
@@ -10,14 +11,10 @@ interface Props {
 
 export default function PageClient({ member }: Props) {
   return (
-    <>
-      <CardHeader className="text-2xl font-semibold text-secondary">
-        Chat
-      </CardHeader>
-      <Divider />
-      <CardBody>
-        Chat goes here
-      </CardBody>
-    </>
+    <CardInnerWrapper 
+      header="chat"
+      body={<div>Chat goes here</div>}
+      footer={<ChatForm />}
+    />
   )
 }

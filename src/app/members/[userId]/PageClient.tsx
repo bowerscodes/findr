@@ -1,20 +1,15 @@
 "use client";
 
 import React from "react";
-import { CardBody, CardHeader, Divider } from "@heroui/react";
 import { Member } from "@/generated/prisma";
+import CardInnerWrapper from "@/components/CardInnerWrapper";
 
 
 export default function PageClient({ member }: { member: Member } ) {
   return (
-    <>
-      <CardHeader className="text-2xl font-semibold text-secondary">
-        Profile
-      </CardHeader>
-      <Divider />
-      <CardBody>
-        {member.description}
-      </CardBody>
-    </>
+    <CardInnerWrapper 
+      header="Profile"
+      body={<div>{member.description}</div>}
+    />
   )
 }
