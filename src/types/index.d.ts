@@ -1,3 +1,4 @@
+import { getMessageThread } from "@/app/actions/messageActions";
 import { Prisma } from "@prisma/client";
 import { ZodIssue } from "zod";
 
@@ -29,9 +30,13 @@ type MessageDto = {
   text: string;
   created: string;
   dateRead: string | null;
-  senderId: string;
+  senderId?: string;
+  senderName?: string;
   senderImage?: string | null;
-  recipientId: string;
-  recipientName: string;
-  recipientImage: string | null;
+  recipientId?: string;
+  recipientName?: string;
+  recipientImage?: string | null;
 };
+
+export type MessageThread = Awaited<ReturnType<typeof getMessageThread>>;
+// export type MessageDto = MessageThread[0];
