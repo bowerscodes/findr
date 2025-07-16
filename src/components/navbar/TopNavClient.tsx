@@ -5,14 +5,14 @@ import Link from 'next/link';
 import React from 'react'
 import { TbHeartSearch } from "react-icons/tb";
 import NavLink from './NavLink';
-import { Session } from 'next-auth';
 import UserMenu from './UserMenu';
+import { UserInfo } from '@/types';
 
 interface TopNavClientProps {
-  session: Session | null
+  userInfo: UserInfo | undefined
 };
 
-export default function TopNavClient({ session }: TopNavClientProps) {
+export default function TopNavClient({ userInfo }: TopNavClientProps) {
   return (
     <Navbar
     maxWidth="xl"
@@ -38,8 +38,8 @@ export default function TopNavClient({ session }: TopNavClientProps) {
         <NavLink href="/messages" label="Messages" />
       </NavbarContent>
       <NavbarContent justify="end">
-        {session?.user ? (
-          <UserMenu user={session.user} />
+        {userInfo ? (
+          <UserMenu userInfo={userInfo} />
         ) : (
           <>
             <Button as={Link} href="/login" variant="bordered" radius="sm" className="text-white">
