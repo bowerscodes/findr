@@ -4,17 +4,17 @@ import { Photo } from "@/generated/prisma";
 import { CldImage } from "next-cloudinary";
 import { Image } from "@heroui/image";
 import React from "react"
+import { isCloudinaryImage } from "@/lib/util";
 
 type Props = {
   photo: Photo | null;
 }
 
 export default function MemberImage({ photo }: Props) {
-  const isCloudinaryImage = photo?.url?.includes("cloudinary");
   
   return (
     <div>
-      {photo?.publicId && isCloudinaryImage ? (
+      {photo?.publicId && isCloudinaryImage(photo) ? (
         <CldImage 
           alt="Image of member"
           src={photo.publicId}

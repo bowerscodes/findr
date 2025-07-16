@@ -1,3 +1,4 @@
+import { Photo } from '@/generated/prisma';
 import { differenceInYears } from 'date-fns';
 import { FieldValues, Path, UseFormSetError } from 'react-hook-form';
 import { ZodIssue } from 'zod';
@@ -19,3 +20,7 @@ export function handleFormServerErrors<TFieldValues extends FieldValues>(
       setError("root.serverError", { message: errorResponse.error });
     }
   };
+
+  export function isCloudinaryImage(photo: Photo | null): boolean {
+    return photo?.url?.includes("cloudinary") || false;
+}

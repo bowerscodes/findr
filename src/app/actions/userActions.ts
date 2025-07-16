@@ -5,6 +5,8 @@ import { memberEditSchema, MemberEditSchema } from "@/lib/schemas/memberEditSche
 import { ActionResult } from "@/types"
 import { getAuthUserId } from "./authActions";
 import { prisma } from "@/lib/prisma";
+import { cloudinary } from "@/lib/cloudinary";
+import { isCloudinaryImage } from "@/lib/util";
 
 export async function updateMemberProfile(data: MemberEditSchema, nameUpdated: boolean): Promise<ActionResult<Member>> {
   try {
@@ -77,6 +79,31 @@ export async function setMainImage(photo: Photo) {
       where: { userId },
       data: { image: photo.url }
     }));
+  } catch (error) {
+    console.log(error);
+    throw error;
+  };
+};
+
+export async function deleteImage(photo: Photo) {
+
+  try {
+    const userId = await getAuthUserId();
+
+    if (isCloudinaryImage(photo) && photo.publicId) {
+      await cloudinary.v2.uploader.destroy(photo.publicId)
+    }
+
+    const result = await prisma.member.update({
+      where: { userId },
+      data: {
+        photos: {
+          delete: { id: photo.id }
+        }
+      }
+    });
+
+    return result;
   } catch (error) {
     console.log(error);
     throw error;
