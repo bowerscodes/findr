@@ -4,12 +4,12 @@ import { Card, CardFooter, Image } from '@heroui/react'
 import { Member } from '@/generated/prisma'
 import React from 'react'
 import Link from 'next/link';
-import { calculateAge } from '@/lib/util';
+import { calculateAge, transformImageUrl } from '@/lib/util';
 import LikeButton from '@/components/LikeButton';
 
 type Props = {
-  member: Member
-  likeIds: string[]
+  member: Member;
+  likeIds: string[];
 }
 
 export default function MemberCard({ member, likeIds }: Props) {
@@ -30,7 +30,7 @@ export default function MemberCard({ member, likeIds }: Props) {
         isZoomed
         alt={member.name}
         width="100%"
-        src={member.image || "/images.user.png"}
+        src={transformImageUrl(member.image) || "/images/user.png"}
         className="aspect-square object-cover" 
       />
       <div onClick={preventLinkAction}>
