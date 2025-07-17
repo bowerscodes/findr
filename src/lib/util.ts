@@ -8,7 +8,7 @@ export function calculateAge(dob: Date) {
 };
 
 export function formatShortDateTime(date: Date) {
-  return format(date, "dd MM yy h:mm:a")
+  return format(date, "dd MMM yy h:mm:a")
 };
 
 export function handleFormServerErrors<TFieldValues extends FieldValues>(
@@ -40,3 +40,11 @@ export function transformImageUrl(imageUrl?: string | null) {
 
   return `${imageUrl.slice(0, uploadIndex)}${transformation}${imageUrl.slice(uploadIndex)}`
 };
+
+export function truncateString(text?: string | null, num = 50) {
+  if (!text) return null;
+  if (text.length <= num) {
+    return text;
+  };
+  return text.slice(0, num) + "..."
+}
