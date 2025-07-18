@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import Providers from '../components/Providers';
 import TopNav from "@/components/navbar/TopNav";
 import "./globals.css";
+import { auth } from "@/auth";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -15,15 +16,18 @@ export const metadata: Metadata = {
   description: "Findr - Your dating assistant",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+  const userId = session?.user?.id || null;
+
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <Providers>
+        <Providers userId={userId}>
           <TopNav />
           <main className="container mx-auto">
             {children} 
