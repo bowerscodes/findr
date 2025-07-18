@@ -12,8 +12,6 @@ export default async function ChatPage({ params }: { params: Promise<{ userId: s
   const messages: MessageThread = await getMessageThread(recipientId);
   const chatId = createChatId(currentUserId, recipientId)
 
-  console.log({ messages });
-
   return (
     <PageClient messages={messages} userId={currentUserId} chatId={chatId} />
   )
