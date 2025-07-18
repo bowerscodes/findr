@@ -1,14 +1,19 @@
-import { useCallback, useEffect, useRef } from "react";
 import usePresenceStore from "./usePresenceStore";
+import { useShallow } from "zustand/shallow";
+import { useCallback, useEffect, useRef } from "react";
 import { Channel, Members } from "pusher-js";
 import { pusherClient } from "@/lib/pusher";
 
 export const usePresenceChannel = () => {
-  const { set, add, remove } = usePresenceStore(state => ({
-    set: state.set,
-    add: state.add,
-    remove: state.remove
-  }));
+  const { set, add, remove } = usePresenceStore(
+    useShallow(
+      state => ({
+        set: state.set,
+        add: state.add,
+        remove: state.remove
+      })
+    )
+  );
 
   const channelRef = useRef<Channel | null>(null);
 
