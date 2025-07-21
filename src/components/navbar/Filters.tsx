@@ -23,6 +23,8 @@ export default function Filters() {
     { value: "Non-binary", icon: FaGenderless }
   ];
 
+  const selectedGender = searchParams.get("gender")?.split(",") || ["male", "female"];
+
   const handleAgeSelect = (value: number[]) => {
     const params = new URLSearchParams(searchParams);
     params.set("ageRange", value.join(","));
@@ -37,16 +39,32 @@ export default function Filters() {
     }
   };
 
+  const handleGenderSelect = (value: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (selectedGender.includes(value)) {
+      params.set("gender", selectedGender.filter(g => g !== value).toString())
+    } else {
+      params.set("gender", [...selectedGender, value].toString());
+    }
+    router.replace(`${pathName}?${params}`);
+  };
+
   if (pathName !== "/members") return null;
 
   return (
     <div className="shadow-md py-2">
       <div className="flex flex-row justify-around items-center">
-        <div className="text-secondary font-semibold text-xl"> Resuls: 10</div>
+        <div className="text-secondary font-semibold text-xl"> Results: 10</div>
         <div>Gender:</div>
         <div className="flex gap-2 items-center">
           {genders.map(({icon: Icon, value}) => (
-            <Button key={value} size="sm" isIconOnly color="secondary">
+            <Button 
+              key={value} 
+              size="sm" 
+              isIconOnly 
+              color={selectedGender.includes(value) ? "secondary" : "default"}
+              onPress={() => handleGenderSelect(value)}
+            >
               <Icon size={24} />
             </Button>
           ))}
