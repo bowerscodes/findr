@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import React from 'react'
+
 import PageClient from './PageClient';
 import { getMemberById } from '@/app/actions/memberActions';
 

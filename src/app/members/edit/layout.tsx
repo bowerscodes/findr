@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react"
+import  { ReactNode } from "react"
 import { getMemberById } from "@/app/actions/memberActions";
 import MemberSidebar from "../MemberSidebar";
 import { notFound } from "next/navigation";

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+;
 import { CardBody, CardHeader, Divider, Image } from "@heroui/react";
 
 interface Props {

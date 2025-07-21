@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import  { useState } from "react";
 import { GoInbox } from "react-icons/go";
 import { MdOutlineOutbox } from "react-icons/md";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";

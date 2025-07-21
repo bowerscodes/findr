@@ -1,4 +1,4 @@
-import React from "react";
+;
 import PageClient from "./PageClient";
 import { getMessageThread } from "@/app/actions/messageActions";
 import { MessageThread } from "@/types";

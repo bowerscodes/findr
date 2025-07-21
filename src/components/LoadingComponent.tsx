@@ -1,5 +1,5 @@
 import { Spinner } from "@heroui/react";
-import React from "react";
+;
 
 export default function LoadingComponent({ label }: { label?: string }) {
   return (

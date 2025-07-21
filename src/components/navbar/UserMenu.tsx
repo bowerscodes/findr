@@ -5,7 +5,7 @@ import { transformImageUrl } from "@/lib/util";
 import { UserInfo } from "@/types";
 import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@heroui/react";
 import Link from "next/link";
-import React from "react";
+;
 
 type Props = {
   userInfo: UserInfo | null;

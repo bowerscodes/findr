@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+;
 import { Member } from "@/generated/prisma";
 import CardInnerWrapper from "@/components/CardInnerWrapper";
 

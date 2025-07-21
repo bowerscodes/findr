@@ -2,7 +2,7 @@ import PresenceAvatar from "@/components/PresenceAvatar";
 import { truncateString } from "@/lib/util";
 import { MessageDto } from "@/types";
 import { Button } from "@heroui/button";
-import React from "react"
+
 import { AiFillDelete } from "react-icons/ai";
 
 type Props = {

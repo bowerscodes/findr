@@ -3,7 +3,7 @@
 import { Photo } from "@/generated/prisma";
 import { CldImage } from "next-cloudinary";
 import { Image } from "@heroui/image";
-import React from "react"
+
 import { isCloudinaryImage } from "@/lib/util";
 
 type Props = {

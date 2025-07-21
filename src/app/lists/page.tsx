@@ -1,4 +1,4 @@
-import React from "react";
+;
 
 import ListsTab from "./ListsTab";
 import { fetchCurrentUserLikeIds, fetchLikedMembers } from "../actions/likeActions";

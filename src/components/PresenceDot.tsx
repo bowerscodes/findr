@@ -1,4 +1,4 @@
-import React from "react";
+;
 import { Member } from "@/generated/prisma";
 import usePresenceStore from "@/hooks/usePresenceStore";
 import { GoDot, GoDotFill } from "react-icons/go";

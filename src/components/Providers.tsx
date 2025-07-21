@@ -5,7 +5,7 @@ import useMessageStore from "@/hooks/useMessageStore";
 import { useNotificationChannel } from "@/hooks/useNotificationChannel";
 import { usePresenceChannel } from "@/hooks/usePresenceChannel";
 import { HeroUIProvider } from "@heroui/react"
-import React, { useCallback, useEffect } from "react"
+import  { useCallback, useEffect } from "react"
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

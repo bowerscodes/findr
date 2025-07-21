@@ -1,4 +1,4 @@
-import React from "react";
+;
 import PageClient from "./PageClient";
 import { getMemberPhotosByUserId } from "@/app/actions/memberActions";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+;
 import { toggleLikeMember } from "@/app/actions/likeActions";
 import { useRouter } from "next/navigation";
 import { FaRegHeart } from "react-icons/fa";

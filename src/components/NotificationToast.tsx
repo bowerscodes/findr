@@ -2,7 +2,7 @@ import { transformImageUrl } from "@/lib/util";
 import { MessageDto } from "@/types";
 import { Image } from "@heroui/react";
 import Link from "next/link";
-import React from "react";
+;
 import { toast } from "react-toastify";
 
 type Props = {

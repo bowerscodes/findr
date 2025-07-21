@@ -1,6 +1,6 @@
 import usePresenceStore from "@/hooks/usePresenceStore";
 import { Avatar, Badge } from "@heroui/react";
-import React from "react";
+;
 
 type Props = {
   userId?: string;

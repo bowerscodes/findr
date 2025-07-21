@@ -1,7 +1,7 @@
 "use client";
 
 import { MessageDto } from "@/types";
-import React, { useEffect, useRef } from "react";
+import  { useEffect, useRef } from "react";
 import clsx from "clsx";
 import { timeAgo, transformImageUrl } from "@/lib/util";
 import PresenceAvatar from "@/components/PresenceAvatar";

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react"
+
 import { CldUploadButton, CloudinaryUploadWidgetResults } from "next-cloudinary";
 import { HiPhoto } from "react-icons/hi2";
 

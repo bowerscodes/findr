@@ -5,7 +5,7 @@ import { Member } from "@/generated/prisma";
 import { calculateAge, transformImageUrl } from "@/lib/util";
 import { Button, Card, CardBody, CardFooter, Divider, Image, Link } from "@heroui/react";
 import { usePathname } from "next/navigation";
-import React from "react";
+;
 
 type Props = {
   member: Member;

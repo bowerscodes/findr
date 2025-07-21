@@ -3,7 +3,7 @@
 import { MessageDto } from "@/types";
 import { Card } from "@heroui/card";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/table";
-import React from "react";
+;
 import MessageTableCell from "./MessageTableCell";
 import { useMessages } from "@/hooks/useMessages";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+;
 import { CardBody, CardHeader, Divider } from "@heroui/react"
 import EditForm from "./EditForm";
 import { Member } from "@/generated/prisma";

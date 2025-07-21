@@ -3,7 +3,7 @@
 import { Member } from "@/generated/prisma";
 import { Tab, Tabs } from "@heroui/react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import React, { Key, useTransition } from "react";
+import  { Key, useTransition } from "react";
 import MemberCard from "../members/MemberCard";
 import LoadingComponent from "@/components/LoadingComponent";
 

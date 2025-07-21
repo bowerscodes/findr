@@ -1,7 +1,7 @@
 "use client";
 
 import { CardHeader, Divider, CardBody } from "@heroui/react";
-import React from "react";
+;
 import MemberPhotoUpload from "./MemberPhotoUpload";
 import { Member } from "@/generated/prisma";
 import MemberPhotos from "@/components/MemberPhotos";

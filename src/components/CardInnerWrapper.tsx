@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import  { ReactNode } from "react";
 import { CardBody, CardFooter, CardHeader, Divider } from "@heroui/react";
 
 type Props = {

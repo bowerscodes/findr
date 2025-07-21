@@ -2,7 +2,7 @@
 
 import { Card, CardFooter, Image } from '@heroui/react'
 import { Member } from '@/generated/prisma'
-import React from 'react'
+
 import Link from 'next/link';
 import { calculateAge, transformImageUrl } from '@/lib/util';
 import LikeButton from '@/components/LikeButton';

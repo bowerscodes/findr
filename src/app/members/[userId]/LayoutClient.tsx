@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@heroui/react";
-import React from "react";
+;
 
 export default function LayoutClient({
   children,

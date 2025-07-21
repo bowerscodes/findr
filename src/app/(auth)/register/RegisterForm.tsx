@@ -1,5 +1,5 @@
 "use client";
-import React from 'react'
+
 import { useForm } from 'react-hook-form';
 import { registerSchema, RegisterSchema } from '@/lib/schemas/registerSchema';
 import { registerUser } from '@/app/actions/authActions';

@@ -4,7 +4,7 @@ import { useFilters } from "@/hooks/useFilters";
 import { Button } from "@heroui/button";
 import { Select, SelectItem, Slider } from "@heroui/react";
 import { usePathname } from "next/navigation";
-import React from "react";
+;
 
 export default function Filters() {
     const pathName = usePathname();

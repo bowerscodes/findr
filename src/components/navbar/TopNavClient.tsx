@@ -2,7 +2,7 @@
 
 import { Button, Navbar, NavbarBrand, NavbarContent } from '@heroui/react'
 import Link from 'next/link';
-import React from 'react'
+
 import { TbHeartSearch } from "react-icons/tb";
 import NavLink from './NavLink';
 import UserMenu from './UserMenu';

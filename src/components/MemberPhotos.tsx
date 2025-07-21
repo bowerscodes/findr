@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import MemberImage from './MemberImage';
 import StarButton from './StarButton';
 import DeleteButton from './DeleteButton';
