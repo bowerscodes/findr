@@ -17,7 +17,7 @@ export async function getMembers(searchParams: UserFilters) {
 
   const orderBySelector = searchParams?.orderBy || "updated";
 
-  const selectedGender = searchParams?.gender?.toString()?.split(",") || ["male", "female", "non-binary"];
+  const selectedGender = searchParams?.gender?.toString()?.split(",") || ["male", "female", "Other"];
 
   try {
     return prisma.member.findMany({

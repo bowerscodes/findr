@@ -20,7 +20,7 @@ export default function Filters() {
   const genders = [
     { value: "male", icon: FaMale },
     { value: "female", icon: FaFemale },
-    { value: "Non-binary", icon: FaGenderless }
+    { value: "Other", icon: FaGenderless }
   ];
 
   const selectedGender = searchParams.get("gender")?.split(",") || ["male", "female"];
