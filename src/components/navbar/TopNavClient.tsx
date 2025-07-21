@@ -2,12 +2,12 @@
 
 import { Button, Navbar, NavbarBrand, NavbarContent } from '@heroui/react'
 import Link from 'next/link';
-
 import { TbHeartSearch } from "react-icons/tb";
+
 import NavLink from './NavLink';
 import UserMenu from './UserMenu';
 import { UserInfo } from '@/types';
-import Filters from './Filters';
+import FiltersWrapper from './FiltersWrapper';
 
 interface TopNavClientProps {
   userInfo: UserInfo | undefined
@@ -54,7 +54,7 @@ export default function TopNavClient({ userInfo }: TopNavClientProps) {
           )}
         </NavbarContent>
       </Navbar>
-      <Filters />
+      <FiltersWrapper />
     </>
   )
 }
