@@ -10,8 +10,6 @@ type Props = {
 export default function PresenceDot({member}: Props) {
   const members = usePresenceStore(state => state.members);
 
-  console.log("presence store members", members)
-
   const isOnline = members.indexOf(member.userId) !== -1;
 
   if (!isOnline) return null;

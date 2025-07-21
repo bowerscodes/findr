@@ -39,4 +39,9 @@ type MessageDto = {
 };
 
 export type MessageThread = Awaited<ReturnType<typeof getMessageThread>>;
-// export type MessageDto = MessageThread[0];
+
+type UserFilters = {
+  ageRange: number[];
+  orderBy: string;
+  gender: string[];
+};
