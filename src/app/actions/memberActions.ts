@@ -1,26 +1,35 @@
 "use server";
 
-import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import { UserFilters } from "@/types";
-import { addYears } from "date-fns";
+import { Member } from "@/generated/prisma";
 import { getAuthUserId } from "./authActions";
+import { GetMemberParams, PaginatedResponse } from "@/types";
+import { addYears } from "date-fns";
 
-export async function getMembers(searchParams: UserFilters) {
-  const session = await auth();
-  if (!session?.user) return null;
+export async function getMembers({
+  ageRange = "18,100",
+  gender= "male,female,non-binary",
+  orderBy = "updated",
+  pageNumber = "1",
+  pageSize = "12"
+}: GetMemberParams): Promise<PaginatedResponse<Member>> {
 
-  const ageRange = searchParams?.ageRange?.toString().split(",") || [18,100];
+  const userId = await getAuthUserId();
+
+  const [minAge, maxAge] = ageRange.split(",")
   const currentDate = new Date();
-  const minDob = addYears(currentDate, -ageRange[1]-1);
-  const maxDob = addYears(currentDate, -ageRange[0]);
+  const minDob = addYears(currentDate, -maxAge-1);
+  const maxDob = addYears(currentDate, -minAge);
 
-  const orderBySelector = searchParams?.orderBy || "updated";
+  const selectedGender = gender.split(",");
 
-  const selectedGender = searchParams?.gender?.toString()?.split(",") || ["male", "female", "Other"];
+  const page = parseInt(pageNumber);
+  const limit = parseInt(pageSize);
+
+  const skip = (page - 1) * limit;
 
   try {
-    return prisma.member.findMany({
+    const count = await prisma.member.count({
       where: {
         AND: [
           { dateOfBirth: { gte: minDob }},
@@ -28,13 +37,33 @@ export async function getMembers(searchParams: UserFilters) {
           { gender: { in: selectedGender }}
         ],
         NOT: {
-          userId: session.user.id
+          userId: userId
+        }
+      },
+    });
+
+    const members = await prisma.member.findMany({
+      where: {
+        AND: [
+          { dateOfBirth: { gte: minDob }},
+          { dateOfBirth: { lte: maxDob }},
+          { gender: { in: selectedGender }}
+        ],
+        NOT: {
+          userId: userId
         }
       },
       orderBy: {
-        [orderBySelector]: "desc"
-      }
+        [orderBy]: "desc"
+      },
+      skip,
+      take: limit
     });
+
+    return {
+      items: members,
+      totalCount: count
+    }
   } catch (error) {
     console.log(error);
     throw error;
