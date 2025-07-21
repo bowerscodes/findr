@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@heroui/button";
-import { Select, SelectItem, Slider } from "@heroui/react";
+import { Selection, Select, SelectItem, Slider } from "@heroui/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { FaFemale, FaGenderless, FaMale } from "react-icons/fa";
@@ -27,6 +27,14 @@ export default function Filters() {
     const params = new URLSearchParams(searchParams);
     params.set("ageRange", value.join(","));
     router.replace(`${pathName}?${params}`);
+  };
+
+  const handleOrderSelect = (value: Selection) => {
+    if (value instanceof Set) {
+      const params = new URLSearchParams(searchParams);
+      params.set("orderBy", value.values().next().value as string);
+      router.replace(`${pathName}?${params}`);
+    }
   };
 
   if (pathName !== "/members") return null;
@@ -60,9 +68,11 @@ export default function Filters() {
             aria-label="Order by selector"
             size="sm"
             fullWidth
-            placeholder="Order by"
+            label="Order by"
             variant="bordered"
             color="secondary"
+            selectedKeys={new Set([searchParams.get("orderBy") || "updated"])}
+            onSelectionChange={handleOrderSelect}
           >
             {orderByList.map(item => (
               <SelectItem key={item.value}>
