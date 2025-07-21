@@ -1,4 +1,3 @@
-;
 import { getMembers } from "../actions/memberActions";
 import MemberCard from "./MemberCard";
 import { fetchCurrentUserLikeIds } from "../actions/likeActions";

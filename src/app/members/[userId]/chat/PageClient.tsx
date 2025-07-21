@@ -1,6 +1,5 @@
 "use client";
 
-;
 import CardInnerWrapper from "@/components/CardInnerWrapper";
 import ChatForm from "./ChatForm";
 import { MessageThread } from "@/types";

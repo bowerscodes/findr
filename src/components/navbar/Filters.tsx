@@ -2,16 +2,27 @@
 
 import { useFilters } from "@/hooks/useFilters";
 import { Button } from "@heroui/button";
-import { Select, SelectItem, Slider } from "@heroui/react";
-;
+import { Select, SelectItem, Slider, Spinner } from "@heroui/react";
+
 
 export default function Filters() {
-  const { genderList, orderByList, filters, selectAge, selectGender, selectOrder } = useFilters();
+  const { 
+    genderList, 
+    orderByList, 
+    filters, 
+    isPending,
+    selectAge, 
+    selectGender, 
+    selectOrder 
+  } = useFilters();
 
   return (
     <div className="shadow-md py-2">
       <div className="flex flex-row justify-around items-center">
-        <div className="text-secondary font-semibold text-xl"> Results: 10</div>
+        <div className="flex gap-2 items-center">
+          <div className="text-secondary font-semibold text-xl"> Results: 10</div>
+          {isPending && <Spinner size="sm" color="secondary" />}
+        </div>
         <div>Gender:</div>
         <div className="flex gap-2 items-center">
           {genderList.map(({icon: Icon, value}) => (
