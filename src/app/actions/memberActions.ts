@@ -10,6 +10,7 @@ export async function getMembers({
   ageRange = "18,100",
   gender= "male,female,non-binary",
   orderBy = "updated",
+  withPhoto = "true",
   pageNumber = "1",
   pageSize = "12"
 }: GetMemberParams): Promise<PaginatedResponse<Member>> {
@@ -34,7 +35,8 @@ export async function getMembers({
         AND: [
           { dateOfBirth: { gte: minDob }},
           { dateOfBirth: { lte: maxDob }},
-          { gender: { in: selectedGender }}
+          { gender: { in: selectedGender }},
+          ...(withPhoto === "true" ? [{ image: { not: null }}] : [])
         ],
         NOT: {
           userId: userId
@@ -47,7 +49,8 @@ export async function getMembers({
         AND: [
           { dateOfBirth: { gte: minDob }},
           { dateOfBirth: { lte: maxDob }},
-          { gender: { in: selectedGender }}
+          { gender: { in: selectedGender }},
+          ...(withPhoto === "true" ? [{ image: { not: null }}] : [])
         ],
         NOT: {
           userId: userId

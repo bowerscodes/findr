@@ -2,7 +2,7 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { FaMale, FaFemale, FaGenderless } from "react-icons/fa";
 import useFilterStore from "./useFilterStore";
-import { useEffect, useTransition } from "react";
+import { ChangeEvent, useEffect, useTransition } from "react";
 import { Selection } from "@heroui/react";
 import usePaginationStore from "./usePaginationStore";
 import { useShallow } from "zustand/shallow";
@@ -25,11 +25,11 @@ export const useFilters = () => {
     )
   );
 
-  const { gender, ageRange, orderBy } = filters;
+  const { gender, ageRange, orderBy, withPhoto } = filters;
 
   useEffect(() => {
     setPage(1);
-  }, [ageRange, gender, orderBy, setPage]);
+  }, [ageRange, gender, orderBy, setPage, withPhoto]);
 
   useEffect(() => {
     startTransition(() => {
@@ -39,12 +39,13 @@ export const useFilters = () => {
       if (ageRange) searchParams.set("ageRange", ageRange.toString());
       if (orderBy) searchParams.set("orderBy", orderBy);
       if (pageSize) searchParams.set("pageSize", pageSize.toString());
-      if (pageNumber) searchParams.set("pageNumber", pageNumber.toString())
+      if (pageNumber) searchParams.set("pageNumber", pageNumber.toString());
+      searchParams.set("withPhoto", withPhoto.toString());
   
       router.replace(`${pathName}?${searchParams}`);
     });
 
-  }, [ageRange, orderBy, gender, router, pathName, pageNumber, pageSize]);
+  }, [ageRange, orderBy, gender, router, pathName, pageNumber, pageSize, withPhoto]);
   
   const orderByList = [
     { label: "Last active", value: "updated" },
@@ -72,12 +73,17 @@ export const useFilters = () => {
     else setFilters("gender", [...gender, value]);
   };
 
+  const handleWithPhotoToggle = (e: ChangeEvent<HTMLInputElement>) => {
+    setFilters("withPhoto", e.target.checked)
+  };
+
   return {
     orderByList,
     genderList,
     selectAge: handleAgeSelect,
-    selectGender: handleGenderSelect,
     selectOrder: handleOrderSelect,
+    selectGender: handleGenderSelect,
+    selectWithPhoto: handleWithPhotoToggle,
     filters,
     isPending,
     totalCount
