@@ -67,6 +67,7 @@ export async function registerUser(data: RegisterSchema): Promise<ActionResult<U
         name,
         email,
         passwordHash: hashedPassword,
+        profileComplete: true,
         member: {
           create: {
             name,
