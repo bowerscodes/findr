@@ -2,7 +2,7 @@
 
 import { auth, signIn, signOut } from "@/auth";
 import { TokenType, User } from "@/generated/prisma";
-import { sendVerificationEmail } from "@/lib/mail";
+import { sendPasswordResetEmail, sendVerificationEmail } from "@/lib/mail";
 import { prisma } from "@/lib/prisma";
 import { LoginSchema } from "@/lib/schemas/loginSchema";
 import { combinedRegisterSchema, RegisterSchema } from "@/lib/schemas/registerSchema";
@@ -155,5 +155,63 @@ export async function verifyEmail (token: string): Promise<ActionResult<string>>
   } catch (error) {
     console.log(error);
     throw error;
+  };
+};
+
+export async function generateResetPasswordEmail (email: string): Promise<ActionResult<string>> {
+  try {
+    const existingUser = await getUserByEmail(email);
+
+    if (!existingUser) {
+      return { status: "error", error: "Email not found" }
+    }
+
+    const token = await generateToken(email, TokenType.PASSWORD_RESET);
+
+    await sendPasswordResetEmail(token.email, token.token);
+
+    return { status: "success", data: "Password reset email has been sent. Please check your emails" }
+
+  } catch (error) {
+    console.log(error);
+    return { status: "error", error: "Something went wrong" };
+  };
+};
+
+export async function resetPassword (password: string, token: string | null): Promise<ActionResult<string>> {
+  try {
+    if (!token) return { status: "error", error: "Missing token" }
+  
+    const existingToken = await getTokenByToken(token);
+  
+    if (!existingToken) return { status: "error", error: "Invalid token" };
+  
+  
+    const hasExpired = new Date() > existingToken.expires;
+  
+    if (hasExpired) return { status: "error", error: "Token has expired" };
+  
+  
+    const existingUser = await getUserByEmail(existingToken.email);
+  
+    if (!existingUser) return { status: "error", error: "User not found" };
+  
+  
+    const hashedPassword = await bcrypt.hash(password, 10);
+  
+    await prisma.user.update({
+      where: { id: existingUser.id },
+      data: { passwordHash: hashedPassword }
+    });
+  
+    await prisma.token.delete({
+      where: { id: existingToken.id }
+    });
+  
+    return { status: "success", data: "Passwod updated successfully. Please try logging in"} 
+    
+  } catch (error) {
+    console.log(error);
+    return { status: "error", error: "Something went wrong" }
   };
 };

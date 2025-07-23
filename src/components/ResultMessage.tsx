@@ -19,7 +19,7 @@ export default function ResultMessage({ result }: Props) {
       ) : (
         <FaExclamationTriangle size={20} />
       )}
-      <p>{result.status === "success" ? result.data : result.error as string}</p>
+      <p className="pl-2">{result.status === "success" ? result.data : result.error as string}</p>
     </div>
   )
 }
