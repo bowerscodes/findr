@@ -1,7 +1,7 @@
+import CompleteProfileForm from "./CompleteProfileForm";
+
 export default function CompleteProfilePage() {
   return (
-    <div>
-      Complete profile
-    </div>
+    <CompleteProfileForm />
   );
 };

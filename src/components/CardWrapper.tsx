@@ -15,7 +15,7 @@ type Props = {
 
 export default function CardWrapper({ body, headerIcon: Icon, headerText, subHeaderText, action, actionLabel, footer }: Props) {
   return (
-    <div className="flex items-center justify-center vertical-center">
+    <div className="flex items-center justify-center py-8">
       <Card className="w-5/10 mx-auto p-2">
         <CardHeader className="flex flex-col items-center justify-center">
           <div className="flex flex-col gap-2 items-center text-secondary">

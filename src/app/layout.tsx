@@ -30,7 +30,7 @@ export default async function RootLayout({
       <body className={roboto.className}>
         <Providers userId={userId} profileComplete={profileComplete}>
           <TopNav />
-          <main className="container mx-auto">
+          <main className="container mx-auto" style={({ minHeight: "calc(100vh - 80px)" })}>
             {children} 
           </main>
         </Providers>
