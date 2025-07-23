@@ -96,6 +96,15 @@ export async function updateLastActive() {
   const userId = await getAuthUserId();
 
   try {
+    // First check if member exists
+    const existingMember = await prisma.member.findUnique({
+      where: { userId }
+    });
+
+    if (!existingMember) {
+      console.log(`No member found for userId: ${userId}`);
+      return null; // or throw an error if this should never happen
+    }
     return prisma.member.update({
       where: { userId },
       data: { updated: new Date() }
