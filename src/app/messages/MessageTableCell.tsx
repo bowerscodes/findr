@@ -1,7 +1,9 @@
+import AppModal from "@/components/AppModal";
 import PresenceAvatar from "@/components/PresenceAvatar";
 import { truncateString } from "@/lib/util";
 import { MessageDto } from "@/types";
-import { Button } from "@heroui/button";
+import { Button, ButtonProps } from "@heroui/button";
+import { useDisclosure } from "@heroui/react";
 
 import { AiFillDelete } from "react-icons/ai";
 
@@ -13,8 +15,14 @@ type Props = {
   isDeleting: boolean;
 };
 
-export default function MessageTableCell({ item, columnKey, isOutbox, deleteMessage, isDeleting }: Props) {
+export default function MessageTableCell ({ item, columnKey, isOutbox, deleteMessage, isDeleting }: Props) {
 const cellValue = item[columnKey as keyof MessageDto];
+const { isOpen, onOpen, onClose } = useDisclosure();
+
+const footerButtons: ButtonProps[] = [
+  { color: "default", onClick: onClose, children: "Close" },
+  { color: "secondary", onClick: onClose, children: "Submit" }
+];
     
 switch (columnKey) {
   case "recipientName":
@@ -35,16 +43,27 @@ switch (columnKey) {
       </div>
     )
   case "created":
-    return cellValue
+    return <div>{cellValue}</div> 
   default:
     return (
-      <Button 
-        isIconOnly variant="light"
-        onPress={() => deleteMessage(item)}
-        isLoading={isDeleting}
-      >
-        <AiFillDelete size={24} className="text-danger" />
-      </Button>
+      <>
+        <Button 
+          isIconOnly variant="light"
+          onPress={() => onOpen()}
+          isLoading={isDeleting}
+        >
+          <AiFillDelete size={24} className="text-danger" />
+        </Button>
+        <AppModal
+          isOpen={isOpen}
+          onClose={onClose}
+          header="Test modal"
+          body={
+            <div>testing, testing</div>
+          }
+          footerButtons={footerButtons}
+        />
+      </>
     );
   };
 };
