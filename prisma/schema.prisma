@@ -40,7 +40,7 @@ model User {
   accounts        Account[]
   member          Member?
   profileComplete Boolean   @default(false)
-  role            Role @default(MEMBER)
+  role            Role      @default(MEMBER)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -67,9 +67,10 @@ model Member {
 }
 
 model Photo {
-  id       String  @id @default(cuid())
-  url      String
-  publicId String?
+  id         String  @id @default(cuid())
+  url        String
+  publicId   String?
+  isApproved Boolean @default(false)
 
   memberId String
   member   Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
@@ -99,11 +100,11 @@ model Message {
 }
 
 model Token {
-  id String @id @default(cuid())
-  email String
-  token String
+  id      String    @id @default(cuid())
+  email   String
+  token   String
   expires DateTime
-  type TokenType
+  type    TokenType
 
   @@unique([email, token])
 }

@@ -82,9 +82,12 @@ export async function getMemberById(userId: string) {
 };
 
 export async function getMemberPhotosByUserId(userId: string) {
+  const currentUserId = await getAuthUserId();
   const member = await prisma.member.findUnique({
     where: { userId },
-    select: {photos: true},
+    select: {photos: {
+      where: currentUserId === userId ? {} : { isApproved: true }
+    }},
   });
 
   if (!member) return [];
@@ -96,14 +99,13 @@ export async function updateLastActive() {
   const userId = await getAuthUserId();
 
   try {
-    // First check if member exists
     const existingMember = await prisma.member.findUnique({
       where: { userId }
     });
 
     if (!existingMember) {
       console.log(`No member found for userId: ${userId}`);
-      return null; // or throw an error if this should never happen
+      return null;
     }
     return prisma.member.update({
       where: { userId },
