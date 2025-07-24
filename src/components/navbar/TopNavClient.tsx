@@ -10,10 +10,13 @@ import { UserInfo } from '@/types';
 import FiltersWrapper from './FiltersWrapper';
 
 interface TopNavClientProps {
-  userInfo: UserInfo | undefined
+  userInfo: UserInfo | undefined;
+  links: { href: string, label: string }[];
 };
 
-export default function TopNavClient({ userInfo }: TopNavClientProps) {
+export default function TopNavClient({ userInfo, links }: TopNavClientProps) {
+
+
   return (
     <>
       <Navbar
@@ -35,9 +38,9 @@ export default function TopNavClient({ userInfo }: TopNavClientProps) {
           </div>
         </NavbarBrand>
         <NavbarContent justify="center">
-          <NavLink href="/members" label="Matches" />
-          <NavLink href="/lists" label="Lists" />
-          <NavLink href="/messages" label="Messages" />
+          {links.map(item => (
+            <NavLink key={item.href} href={item.href} label={item.label} />
+          ))}
         </NavbarContent>
         <NavbarContent justify="end">
           {userInfo ? (
