@@ -24,7 +24,7 @@ export async function getTokenByToken (token: string) {
 };
 
 function generateSecureToken (): string {
-  const array = new Uint8Array(32);
+  const array = new Uint8Array(48);
   crypto.getRandomValues(array);
   return Array.from(array, byte => byte.toString(16).padStart(2, "0")).join("");
 };
