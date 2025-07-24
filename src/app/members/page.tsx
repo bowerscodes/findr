@@ -5,6 +5,8 @@ import PaginationComponent from "@/components/PaginationComponent";
 import { GetMemberParams } from "@/types";
 import EmptyState from "@/components/EmptyState";
 
+export const dynamic = "force-dynamic";
+
 export default async function MembersPage({ searchParams }: { searchParams: Promise<GetMemberParams> }) {
   const [resolvedSearchParams, likeIds] = await Promise.all([
     searchParams,
