@@ -1,7 +1,6 @@
 "use client";
 
 import { CardHeader, Divider, CardBody } from "@heroui/react";
-;
 import MemberPhotoUpload from "./MemberPhotoUpload";
 import { Member } from "@/generated/prisma";
 import MemberPhotos from "@/components/MemberPhotos";
@@ -11,6 +10,7 @@ type Photo = {
   url: string;
   publicId: string | null;
   memberId: string;
+  isApproved: boolean;
 };
 
 type Props = {

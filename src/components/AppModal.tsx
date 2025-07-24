@@ -4,9 +4,10 @@ import { ReactNode } from "react";
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  header: string;
+  header?: string;
   body: ReactNode;
-  footerButtons: ButtonProps[];
+  footerButtons?: ButtonProps[];
+  imageModal?: boolean;
 }
 
 export default function AppModal ({
@@ -14,7 +15,8 @@ export default function AppModal ({
   onClose, 
   header, 
   body, 
-  footerButtons
+  footerButtons,
+  imageModal
 }: Props
 ) {
   return (
@@ -22,6 +24,10 @@ export default function AppModal ({
       isOpen={isOpen}
       onClose={onClose}
       placement="top-center"
+      classNames={{
+        base: `${imageModal ? "border-2 border-white" : "" }`,
+        body: `${imageModal ? "p-0" : "" }`
+      }}
       motionProps={{
         variants: {
           enter: { y:0, opacity: 100, transition: { duration: 0.1 } },
@@ -30,15 +36,17 @@ export default function AppModal ({
       }}
     >
       <ModalContent>
-        <ModalHeader className="flex flex-col gap-1">{header}</ModalHeader>
+        {!imageModal && <ModalHeader className="flex flex-col gap-1">{header}</ModalHeader>}
         <ModalBody>{body}</ModalBody>
-        <ModalFooter>
-          {footerButtons.map((props: ButtonProps, index) => (
-            <Button {...props} key={index}>
-              {props.children}
-            </Button>
-          ))}
-        </ModalFooter>
+        {!imageModal && 
+          <ModalFooter>
+            {footerButtons && footerButtons.map((props: ButtonProps, index) => (
+              <Button {...props} key={index}>
+                {props.children}
+              </Button>
+            ))}
+          </ModalFooter>
+        }
       </ModalContent>
     </Modal>
   )

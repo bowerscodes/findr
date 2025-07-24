@@ -1,7 +1,7 @@
 "use client";
 
-;
-import { CardBody, CardHeader, Divider, Image } from "@heroui/react";
+import MemberPhotos from "@/components/MemberPhotos";
+import { CardBody, CardHeader, Divider } from "@heroui/react";
 
 interface Props {
   photos: {
@@ -9,6 +9,7 @@ interface Props {
     url: string;
     publicId: string | null;
     memberId: string;
+    isApproved: boolean;
 }[];
 };
 
@@ -20,18 +21,7 @@ export default function PageClient({ photos }: Props) {
       </CardHeader>
       <Divider />
       <CardBody>
-        <div className="grid grid-cols-5 gap-3">
-          {photos && photos.map(photo => (
-            <div key={photo.id}>
-              <Image
-                width={300}
-                src={photo.url} 
-                alt={`Photo of member`} 
-                className="object-cover aspect-square"
-            />
-            </div>
-          ))}
-        </div>
+        <MemberPhotos photos={photos} />
       </CardBody>
     </div>
   )

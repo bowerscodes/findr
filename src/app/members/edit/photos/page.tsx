@@ -1,4 +1,3 @@
-;
 import PageClient from "./PageClient";
 import { getAuthUserId } from "@/app/actions/authActions";
 import { getMemberById, getMemberPhotosByUserId } from "@/app/actions/memberActions";
