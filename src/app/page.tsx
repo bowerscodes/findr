@@ -1,37 +1,25 @@
-import { auth, signOut } from "@/auth";
-import { Button } from "@heroui/button";
-import { FaRegSmile } from "react-icons/fa";
+import { auth } from "@/auth";
+import ClientSession from "@/components/ClientSession";
+
 
 export default async function Home() {
   const session = await auth();
 
   return (
-    <div>
-      <h1 className="text-3xl">Welcome to findr</h1>
-
-      <h3 className="text-2xl font-semibold">User session data:</h3>
-      {session ? (
-        <div>
-          <pre>{JSON.stringify(session, null, 2)}</pre>
-          <form action={async () => {
-            "use server";
-            await signOut();
-          }}>
-            <Button 
-              type="submit"
-              color="primary" 
-              variant="bordered" 
-              startContent={<FaRegSmile size={20}/>}
-            >
-              Sign out
-            </Button>
-          </form>
-        </div>
-      ) : (
-        <div>
-          <p>No user session found. Please log in.</p>
-        </div>
-      )}
+    <div className="flex flex-row justify-around mt-20 gap-6">
+      <div className="bg-green-50 p-10 rounded-xl shadow-md w-1/2 overflow-auto">
+        <h3 className="text-2xl font-semibold">Server session data:</h3>
+        {session ? (
+          <div>
+            <pre>{JSON.stringify(session, null, 2)}</pre>
+          </div>
+        ) : (
+          <div>
+            <p>Not signed in</p>
+          </div>
+        )}
+      </div>
+      <ClientSession />
     </div>
   );
 }

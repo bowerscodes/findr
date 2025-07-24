@@ -5,7 +5,8 @@ import useMessageStore from "@/hooks/useMessageStore";
 import { useNotificationChannel } from "@/hooks/useNotificationChannel";
 import { usePresenceChannel } from "@/hooks/usePresenceChannel";
 import { HeroUIProvider } from "@heroui/react"
-import  { useCallback, useEffect } from "react"
+import { SessionProvider } from "next-auth/react";
+import { useCallback, useEffect } from "react"
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -35,9 +36,11 @@ export default function Providers({
   usePresenceChannel(userId, profileComplete);
   useNotificationChannel(userId, profileComplete);
   return (
-    <HeroUIProvider>
-      <ToastContainer position="top-center" className="z-50" />
-      {children}
-    </HeroUIProvider>
-  )
+    <SessionProvider>
+      <HeroUIProvider>
+        <ToastContainer position="top-center" className="z-50" />
+        {children}
+      </HeroUIProvider>
+    </SessionProvider>
+  );
 };
