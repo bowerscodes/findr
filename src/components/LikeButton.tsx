@@ -1,29 +1,28 @@
 "use client";
 
-;
-import { toggleLikeMember } from "@/app/actions/likeActions";
-import { useRouter } from "next/navigation";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
+import { PiSpinnerGap } from "react-icons/pi";
 
 
 type Props = {
-  targetId: string;
+  loading: boolean;
   hasLiked: boolean;
-}
+  toggleLike: () => void;
+};
 
-export default function LikeButton({ targetId, hasLiked }: Props) {
-  const router = useRouter();
-
-  async function toggleLike() {
-    await toggleLikeMember(targetId, hasLiked);
-    router.refresh();
-  }
+export default function LikeButton({ loading, toggleLike, hasLiked }: Props) {
 
   return (
-    <div onClick={toggleLike} className="relative hover:opacity-80 transition cursor-pointer">
-      <FaRegHeart size={28} className="fill-white absolute -top-[2px] -right-[2px]"/>
-      <FaHeart size={24} className={hasLiked ? "fill-rose-500" : "fill-neutral-500/70"}/>
-    </div>
-  )
+    <>
+      {!loading ? (
+        <div onClick={toggleLike} className="relative hover:opacity-80 transition cursor-pointer">
+          <FaRegHeart size={28} className="fill-white absolute -top-[2px] -right-[2px]"/>
+          <FaHeart size={24} className={hasLiked ? "fill-rose-500" : "fill-neutral-500/70"}/>
+        </div>
+      ) : (
+        <PiSpinnerGap size={32} className="fill-white animate-spin" />
+      )}
+    </>
+  );
 };
