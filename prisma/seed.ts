@@ -63,7 +63,8 @@ async function main() {
   } catch {
     console.log("Some tables don't exist yet, continuing with seeding...");
   }
-
+  
+  if (process.env.RUN_SEED === "true" || process.env.NODE_ENV === "development")
   console.log("Seeding members...");
   await seedMembers();
   
